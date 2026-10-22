@@ -1,0 +1,11 @@
+{
+  "name": "UniMate AI | مساعدك الجامعي الذكي",
+  "short_name": "UniMate",
+  "start_url": "/UniMate/",
+  "scope": "/UniMate/",
+  "display": "standalone",
+  "background_color": "#f6f5fb",
+  "theme_color": "#5b3df5",
+  "lang": "ar",
+  "dir": "rtl"
+}
