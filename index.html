@@ -241,6 +241,41 @@ const tm = x => (typeof x === "number" ? { t: x, m: 25 } : x);
 const workSecs = () => (S.tmin || 25) * 60;
 const breakSecs = () => { const m = S.tmin || 25; return (m <= 25 ? 5 : m <= 60 ? 10 : 15) * 60; };
 let tLeft = (S.tmin || 25) * 60, tMode = "work", tInt = null;
+let audioCtx = null;
+function timerTick() {
+  try {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) return;
+    audioCtx = audioCtx || new AudioContext();
+    if (audioCtx.state === "suspended") audioCtx.resume();
+    const osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
+    const now = audioCtx.currentTime;
+    osc.type = "sine"; osc.frequency.value = 900;
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.exponentialRampToValueAtTime(0.035, now + 0.004);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.045);
+    osc.connect(gain); gain.connect(audioCtx.destination);
+    osc.start(now); osc.stop(now + 0.05);
+  } catch (e) {}
+}
+function timerChime() {
+  try {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) return;
+    audioCtx = audioCtx || new AudioContext();
+    if (audioCtx.state === "suspended") audioCtx.resume();
+    const now = audioCtx.currentTime;
+    [0, 0.5, 1, 1.5, 2, 2.5].forEach((offset, i) => {
+      const osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
+      osc.type = "sine"; osc.frequency.value = i % 2 === 1 ? 880 : 660;
+      gain.gain.setValueAtTime(0.0001, now + offset);
+      gain.gain.exponentialRampToValueAtTime(0.22, now + offset + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + offset + 0.38);
+      osc.connect(gain); gain.connect(audioCtx.destination);
+      osc.start(now + offset); osc.stop(now + offset + 0.4);
+    });
+  } catch (e) {}
+}
 function tPaint() {
   const e = $("time"); if (!e) return;
   e.textContent = String(Math.floor(tLeft / 60)).padStart(2, "0") + ":" + String(tLeft % 60).padStart(2, "0");
@@ -255,7 +290,7 @@ function tPaint() {
 }
 function tToggle() {
   if (tInt) { clearInterval(tInt); tInt = null; } else tInt = setInterval(() => {
-    if (--tLeft <= 0) { if (tMode === "work") plantTree(S.tmin || 25); tMode = tMode === "work" ? "break" : "work"; tLeft = tMode === "work" ? workSecs() : breakSecs(); try { navigator.vibrate && navigator.vibrate(300); } catch (e) {} }
+    timerTick(); if (--tLeft <= 0) { timerChime(); if (tMode === "work") plantTree(S.tmin || 25); tMode = tMode === "work" ? "break" : "work"; tLeft = tMode === "work" ? workSecs() : breakSecs(); try { navigator.vibrate && navigator.vibrate(300); } catch (e) {} }
     tPaint();
   }, 1000);
   tPaint();
