@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#5b3df5">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="UniMate">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="icon-192.png">
+<title>UniMate AI | مساعدك الجامعي الذكي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f5fb;--surface:#fff;--ink:#14112b;--muted:#625f7e;--line:#e6e3f4;--brand:#5b3df5;--pink:#ff4d8d;--sun:#f5a524;--mint:#12b886;--sky:#2f8bff;--soft:#efecff;--on:#14112b;--shadow:0 1px 2px rgba(20,17,43,.06),0 10px 28px -14px rgba(20,17,43,.18);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f0c24;--surface:#191537;--ink:#f2efff;--muted:#a9a3d1;--line:#2c2659;--brand:#7a5cff;--soft:#241f4d;--sun:#ffc247;--mint:#2ad4a3;--sky:#5bb0ff;--shadow:0 1px 2px rgba(0,0,0,.3)}}
+:root[data-theme="dark"]{--bg:#0f0c24;--surface:#191537;--ink:#f2efff;--muted:#a9a3d1;--line:#2c2659;--brand:#7a5cff;--soft:#241f4d;--sun:#ffc247;--mint:#2ad4a3;--sky:#5bb0ff;--shadow:0 1px 2px rgba(0,0,0,.3)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{margin:0;padding:0;box-sizing:border-box}
+[hidden]{display:none!important}
+body{font-family:Cairo,Tahoma,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;min-height:100vh}
+.wrap{max-width:800px;margin:0 auto;padding:16px 16px 110px}
+.top{display:flex;align-items:center;gap:10px;padding:4px 0 16px;font-weight:800;font-size:1.15rem}
+.logo{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,var(--brand),var(--pink));display:inline-grid;place-items:center;color:#fff;font-weight:800;font-size:1rem}
+.beta{font-size:.7rem;font-weight:700;background:var(--soft);color:var(--brand);padding:0 10px;border-radius:99px}
+.head{margin:4px 0 16px}
+h2{font-size:1.55rem;font-weight:800;line-height:1.4}
+h3{font-size:1.02rem;font-weight:800;margin-bottom:8px}
+.muted{color:var(--muted)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px;margin-bottom:14px;box-shadow:var(--shadow)}
+.hero{background:linear-gradient(135deg,var(--brand),#8a4dff 55%,var(--pink));color:#fff;border:0;padding:24px}
+.hero h2{font-size:1.6rem}
+.hero p{opacity:.92}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 16px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.tile::before{content:"";position:absolute;inset-block:0;inset-inline-start:0;width:5px;background:var(--a)}
+.tile b{display:block;font-size:1.7rem;line-height:1.3;font-weight:800}
+.tile span{font-size:.84rem;color:var(--muted);font-weight:600}
+button{font:inherit;font-weight:700;background:var(--brand);color:#fff;border:0;border-radius:12px;padding:10px 20px;cursor:pointer;transition:filter .15s,transform .15s}
+button:hover{filter:brightness(1.1)}
+button:active{transform:scale(.98)}
+button:disabled{opacity:.5;cursor:default}
+button.ghost{background:transparent;color:var(--brand);border:1.5px solid var(--line)}
+button.ghost:hover{background:var(--soft);filter:none}
+button.sm{padding:5px 14px;font-size:.88rem}
+:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
+label.f{display:block;font-weight:600;margin-bottom:10px;font-size:.94rem}
+input[type=text],input[type=number],input[type=date],input[type=time],select{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;margin-top:4px}
+input:focus,select:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px var(--soft)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.inl{display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap}
+.inl>*{flex:1;min-width:110px}
+.inl>button{flex:0 0 auto}
+.opt{display:flex;gap:10px;align-items:center;border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;margin-bottom:8px;cursor:pointer}
+.opt:has(input:checked){border-color:var(--brand);background:var(--soft)}
+.opt input{accent-color:var(--brand);width:18px;height:18px}
+fieldset{border:0;margin-bottom:10px}
+legend{font-weight:600;margin-bottom:6px}
+.bar{height:10px;border-radius:99px;background:var(--soft);overflow:hidden;margin:6px 0 12px}
+.bar i{display:block;height:100%;background:var(--mint);border-radius:99px;transition:width .3s}
+.row{display:flex;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.row:first-of-type{border-top:0}
+.row input[type=checkbox]{width:20px;height:20px;accent-color:var(--mint)}
+.row .t{flex:1}
+.row .s{display:block;color:var(--muted);font-size:.84rem}
+.row.done .n{text-decoration:line-through;color:var(--muted)}
+.dot{width:10px;height:10px;border-radius:50%;flex:0 0 auto}
+.chip{display:inline-block;border-radius:99px;padding:1px 12px;font-size:.84rem;font-weight:700;margin:2px 0 2px 6px;background:var(--soft)}
+.chip.hot{background:var(--sun);color:var(--on)}
+.timer{text-align:center}
+.time{font-size:3.2rem;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.2}
+.timer .inl{justify-content:center}
+.timer .inl>*{flex:0 0 auto}
+.chat{display:grid;gap:8px;margin:12px 0;max-height:52vh;overflow-y:auto}
+.msg{padding:10px 14px;border-radius:16px;white-space:pre-wrap;max-width:92%}
+.msg.u{background:var(--brand);color:#fff;justify-self:start}
+.msg.a{background:var(--soft);justify-self:end}
+.wd{padding:10px 0;border-top:1px solid var(--line)}
+.wd:first-of-type{border-top:0}
+.wd.today b{color:var(--brand)}
+.cls{background:var(--sky);color:var(--on)}
+.badges{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
+.badge{text-align:center;border-radius:16px;padding:12px 6px;background:var(--soft);font-weight:700;font-size:.88rem}
+.badge i{display:block;font-style:normal;font-size:1.8rem}
+.badge.off{color:var(--muted);filter:grayscale(1);opacity:.6}
+.bars{display:flex;gap:8px;align-items:flex-end;height:120px}
+.bars div{flex:1;text-align:center;font-size:.75rem;color:var(--muted)}
+.bars em{display:block;background:linear-gradient(var(--brand),var(--pink));border-radius:8px 8px 0 0;min-height:4px}
+.note{background:var(--soft);color:var(--ink);border-radius:14px;padding:12px 16px;margin-bottom:12px}
+.empty{text-align:center;padding:28px 18px}
+.feat{list-style:none;margin:0 0 16px}
+.feat li{padding:6px 0 6px 0;color:var(--muted)}
+.feat li::before{content:"✓";color:var(--mint);font-weight:800;margin-inline-end:10px}
+.nav{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:space-around;background:var(--surface);border-top:1px solid var(--line);padding:6px 2px calc(6px + env(safe-area-inset-bottom,0px));z-index:5}
+.nav button{background:none;color:var(--muted);padding:5px 2px;font-size:.68rem;line-height:1.3;flex:1;border-radius:12px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:1px}
+.nav button .ic{display:block;height:22px}
+.nav button[aria-current=page]{color:var(--brand);background:var(--soft)}
+.bside{display:none}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(88px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:10px 20px;border-radius:12px;font-weight:600;z-index:20;box-shadow:var(--shadow)}
+dialog{border:0;border-radius:20px;padding:22px;max-width:340px;width:90%;margin:auto;background:var(--surface);color:var(--ink);box-shadow:0 20px 50px rgba(0,0,0,.3)}
+dialog::backdrop{background:rgba(20,17,43,.55)}
+dialog .inl{margin-top:16px;justify-content:flex-end}
+dialog .inl>*{flex:0 0 auto}
+@media (min-width:900px){
+body{padding-inline-start:236px}
+.top{display:none}
+.wrap{padding:28px 28px 48px}
+.nav{top:0;bottom:0;left:auto;right:0;width:236px;flex-direction:column;justify-content:flex-start;gap:4px;border-top:0;border-inline-start:1px solid var(--line);padding:22px 14px}
+.nav button{flex:0 0 auto;flex-direction:row;gap:12px;font-size:.98rem;padding:10px 14px;justify-content:flex-start}
+.bside{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.15rem;padding:0 6px 18px}
+.toast{bottom:28px}
+}
+@media (max-width:520px){.g2{grid-template-columns:1fr}.hero h2{font-size:1.35rem}.tiles{gap:8px}.tile{padding:12px}.tile b{font-size:1.4rem}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+.forest{display:flex;flex-wrap:wrap;gap:4px;font-size:30px;line-height:1.2}
+.lb{display:flex;gap:10px;align-items:center;padding:10px 12px;border-radius:12px}
+.lb.me{background:rgba(124,92,255,.22)}.lb .n{flex:1}.lb .r{width:30px;text-align:center}
+@media (max-width:520px){input[type=text],input[type=number],input[type=date],input[type=time],select,textarea{font-size:16px}}
+html{-webkit-tap-highlight-color:transparent}body{overscroll-behavior-y:none}
+.picks{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:8px 0}
+button.ghost.on{background:var(--soft);border-color:var(--brand)}
+.plant{font-size:3.4rem;line-height:1.2;margin-top:4px}
+.lb .bar{margin:2px 0 0;height:6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><span class="logo">U</span>UniMate AI<span class="beta">تجريبي</span></div>
+  <main id="view"></main>
+</div>
+<nav class="nav" id="nav" hidden aria-label="التنقل"></nav>
+<div id="toast" class="toast" role="status" hidden></div>
+<dialog id="dlg"><form method="dialog"><p id="dmsg"></p><div class="inl"><button value="no" class="ghost">إلغاء</button><button value="ok">تأكيد</button></div></form></dialog>
+
+<script>
+/* المساعد الذكي: بعد نشر الدالة على Supabase حط الرابط والمفتاح العام (anon) هنا */
+const AI_URL = "https://meavuwntikizkfjhtnbd.supabase.co/functions/v1/quick-service";
+const AI_KEY = "sb_publishable_IClfN-hW7TnDtlqM_-1xVg_DhxUlBmO";
+const KEY = "unimate-v2", PAL = ["#6c4cff", "#ff4d8d", "#ffb400", "#12b886", "#2f9bff"];
+const DAYS = ["الأحد", "الإثنين", "الثلاثاء", "الأربع", "الخميس", "الجمعة", "السبت"];
+const TABS = [["home", "الرئيسية"], ["forest", "الغابة"], ["ai", "المساعد"], ["subjects", "موادي"], ["schedule", "الجدول"], ["exams", "امتحانات"], ["progress", "تقدمي"], ["account", "حسابي"]];
+const HINTS = { "تراكم المحاضرات": "صفّي محاضرة متأخرة الأول", "ضيق الوقت": "ركّز على الأكتر تكرارًا في الامتحان", "صعوبة فهم المواد": "اشرحها بصوتك كأنك بتعلّم زميلك", "التأجيل وعدم الالتزام": "ابدأ بـ10 دقايق بس" };
+const $ = id => document.getElementById(id);
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
+const iso = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+const dnum = s => { const [y, m, d] = s.split("-").map(Number); return Date.UTC(y, m - 1, d) / 864e5; };
+
+/* بناء عناصر الصفحة بأمان (textContent فقط) */
+function h(tag, p = {}, ...kids) {
+  const n = document.createElement(tag); let val;
+  for (const [k, v] of Object.entries(p)) {
+    if (k === "class") n.className = v;
+    else if (k.startsWith("on")) n.addEventListener(k.slice(2), v);
+    else if (k === "value") val = v;
+    else if (v === true) n.setAttribute(k, "");
+    else if (v !== false && v != null) n.setAttribute(k, v);
+  }
+  kids.flat(9).forEach(x => { if (x != null && x !== false) n.append(x.nodeType ? x : document.createTextNode(x)); });
+  if (val !== undefined) n.value = val;
+  return n;
+}
+
+/* طبقة التخزين: دلوقتي المتصفح، وبعدين تتبدّل بـ Supabase من غير ما نغيّر باقي الكود */
+const store = {
+  load() { try { return JSON.parse(localStorage.getItem(KEY)); } catch (e) { return null; } },
+  save(s) { try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {} },
+  clear() { try { localStorage.removeItem(KEY); } catch (e) {} }
+};
+let S = store.load() || { profile: null, subjects: [], exams: [], classes: [], done: {} };
+let tab = "home";
+let syncT; const commit = () => { store.save(S); render(); if (S.notifOn) { clearTimeout(syncT); syncT = setTimeout(() => syncNotif(), 1500); } };
+
+/* ---------- الخطة الذكية ---------- */
+function nextExam(sid, t) {
+  const d = S.exams.filter(e => e.sid === sid && dnum(e.date) >= t).map(e => dnum(e.date) - t);
+  return d.length ? Math.min(...d) : null;
+}
+function planFor(date) {
+  const total = S.profile.hours * 60, t = dnum(iso(date));
+  let list = S.subjects.map(s => {
+    const left = nextExam(s.id, t), undone = s.lectures.filter(l => !l.done).length;
+    const urgency = left === null ? 0.6 : Math.min(3, 14 / (left + 1));
+    return { id: s.id, name: s.name, c: s.c, left, w: s.diff * (1 + urgency) * (1 + Math.min(undone, 10) * 0.05) };
+  }).sort((a, b) => b.w - a.w);
+  if (!list.length) return [];
+  for (let i = 0; i < 4; i++) {
+    const sum = list.reduce((a, x) => a + x.w, 0);
+    const next = list.filter(x => total * x.w / sum >= 15);
+    if (next.length === list.length) break;
+    list = next.length ? next : [list[0]];
+    if (!next.length) break;
+  }
+  const sum = list.reduce((a, x) => a + x.w, 0);
+  return list.map(x => ({ ...x, min: Math.max(5, Math.round(total * x.w / sum / 5) * 5) }));
+}
+function stats() {
+  const dn = Object.entries(S.done), mins = dn.reduce((a, [, v]) => a + v, 0);
+  const dates = new Set(dn.map(([k]) => k.split("|")[0]));
+  let streak = 0; const d = new Date();
+  if (!dates.has(iso(d))) d.setDate(d.getDate() - 1);
+  while (dates.has(iso(d))) { streak++; d.setDate(d.getDate() - 1); }
+  const lec = S.subjects.reduce((a, s) => a + s.lectures.filter(l => l.done).length, 0);
+  const xp = Math.round(mins / 3) + lec * 15;
+  return { mins, streak, lec, xp, lvl: Math.floor(xp / 100) + 1, tasks: dn.length };
+}
+const BADGES = [["🌱", "أول مهمة", s => s.tasks >= 1], ["💪", "10 مهام", s => s.tasks >= 10], ["🔥", "3 أيام متتالية", s => s.streak >= 3], ["📖", "5 محاضرات", s => s.lec >= 5], ["⏱️", "ساعة مذاكرة", s => s.mins >= 60], ["🏆", "مستوى 3", s => s.lvl >= 3]];
+const subj = id => S.subjects.find(s => s.id === id);
+
+/* ---------- عناصر مشتركة ---------- */
+const inp = (name, v, type = "text", extra = {}) => h("input", { name, type, value: v ?? "", required: true, ...extra });
+const fld = (txt, node) => h("label", { class: "f" }, txt, node);
+
+function profileForm(onSave, btn) {
+  const p = S.profile || {};
+  const year = h("select", { name: "year", required: true }, h("option", { value: "", disabled: true }, "اختار"),
+    ["الأولى", "التانية", "التالتة", "الرابعة", "الخامسة أو أكتر"].map(y => h("option", { value: y }, y)));
+  year.value = p.year || "";
+  const f = h("form", { class: "card", onsubmit: e => {
+    e.preventDefault(); const g = n => f.elements[n].value;
+    onSave({ name: g("name").trim(), uni: g("uni").trim(), year: g("year"), hours: +g("hours"), problem: g("problem") });
+  } },
+    h("div", { class: "g2" }, fld("الاسم", inp("name", p.name)), fld("اسم الجامعة", inp("uni", p.uni)),
+      fld("السنة الدراسية", year), fld("ساعات المذاكرة المتاحة يوميًا", inp("hours", p.hours, "number", { min: 0.5, max: 16, step: 0.5 }))),
+    h("fieldset", {}, h("legend", {}, "إيه أكبر مشكلة بتواجهك في المذاكرة؟"),
+      Object.keys(HINTS).map(k => h("label", { class: "opt" }, h("input", { type: "radio", name: "problem", value: k, required: true, checked: p.problem === k }), k))),
+    h("button", { type: "submit" }, btn));
+  return f;
+}
+
+/* ---------- المؤقت (بيكمّل حتى لو غيّرت الصفحة) ---------- */
+const DUR = [[15, "🌿", "شتلة"], [25, "🌳", "شجرة"], [45, "🌲", "صنوبرة"], [60, "🌴", "نخلة"], [90, "🌸", "شجرة مزهرة"]];
+const tier = m => DUR.find(d => d[0] === m) || DUR[1];
+const tm = x => (typeof x === "number" ? { t: x, m: 25 } : x);
+const workSecs = () => (S.tmin || 25) * 60;
+const breakSecs = () => { const m = S.tmin || 25; return (m <= 25 ? 5 : m <= 60 ? 10 : 15) * 60; };
+let tLeft = (S.tmin || 25) * 60, tMode = "work", tInt = null;
+function tPaint() {
+  const e = $("time"); if (!e) return;
+  e.textContent = String(Math.floor(tLeft / 60)).padStart(2, "0") + ":" + String(tLeft % 60).padStart(2, "0");
+  $("tMode").textContent = tMode === "work" ? "جلسة تركيز" : "وقت راحة";
+  $("tGo").textContent = tInt ? "إيقاف مؤقت" : "ابدأ";
+  const pl = $("tPlant"), cp = $("tCap"), mn = S.tmin || 25, [, em, nm] = tier(mn);
+  if (pl) {
+    const pr = 1 - tLeft / (tMode === "work" ? workSecs() : breakSecs());
+    pl.textContent = tMode === "work" ? (pr < .34 ? "🌱" : pr < .67 ? "🌿" : em) : "☕";
+    cp.textContent = tMode === "work" ? "هتطلع " + nm + " " + em + " لما تكمّل " + mn + " دقيقة من غير إعادة" : "خد راحتك شوية ☕";
+  }
+}
+function tToggle() {
+  if (tInt) { clearInterval(tInt); tInt = null; } else tInt = setInterval(() => {
+    if (--tLeft <= 0) { if (tMode === "work") plantTree(S.tmin || 25); tMode = tMode === "work" ? "break" : "work"; tLeft = tMode === "work" ? workSecs() : breakSecs(); try { navigator.vibrate && navigator.vibrate(300); } catch (e) {} }
+    tPaint();
+  }, 1000);
+  tPaint();
+}
+function tReset() { if (tMode === "work" && tLeft < workSecs()) toast("🥀 الشجرة دبلت... كمّل 25 دقيقة المرة الجاية"); clearInterval(tInt); tInt = null; tMode = "work"; tLeft = workSecs(); tPaint(); }
+
+const IC = { forest: "M12 3l5 7h-3l4 6H6l4-6H7l5-7zM12 16v5", home: "M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10", ai: "M21 11.5a8.5 8.5 0 01-8.5 8.5H4l1.8-3.6A8.5 8.5 0 1121 11.5z", subjects: "M4 5a2 2 0 012-2h13v16H6a2 2 0 00-2 2V5zM4 19a2 2 0 012-2h13", schedule: "M4 6h16v14H4zM4 10h16M8 3v4M16 3v4", exams: "M9 4h6v3H9zM6 5h12v16H6zM9 14l2 2 4-4", progress: "M4 20V10M10 20V4M16 20v-7M22 20H2", account: "M12 12a4 4 0 100-8 4 4 0 000 8zM4 21a8 8 0 0116 0" };
+function ico(k) {
+  const n = document.createElement("span"); n.className = "ic";
+  n.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="' + IC[k] + '"/></svg>';
+  return n;
+}
+const head = (t, sub) => h("div", { class: "head" }, h("h2", {}, t), h("p", { class: "muted" }, sub));
+let toastT;
+function toast(msg) { const t = $("toast"); t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => t.hidden = true, 2600); }
+function sure(msg) {
+  return new Promise(res => { const d = $("dlg"); $("dmsg").textContent = msg; d.returnValue = ""; d.onclose = () => res(d.returnValue === "ok"); d.showModal(); });
+}
+
+/* ---------- الصفحات ---------- */
+/* ---------- الغابة والمنافسة ---------- */
+const FOREST_URL = AI_URL.replace("quick-service", "forest");
+const TREES = ["🌳", "🌲", "🌴", "🌿", "🌵"];
+let board = null, boardAt = 0, boardBusy = false;
+const getPid = () => { if (!S.pid) { S.pid = (crypto.randomUUID ? crypto.randomUUID() : uid() + uid() + uid()); store.save(S); } return S.pid; };
+const myName = () => (S.nick || (S.profile && S.profile.name) || "طالب").slice(0, 20);
+async function forestCall(action, extra = {}) {
+  const r = await fetch(FOREST_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action, pid: getPid(), name: myName(), ...extra }) });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(j.error || r.status);
+  return j;
+}
+async function loadBoard(action = "board", extra = {}) {
+  boardBusy = true;
+  try { board = await forestCall(action, extra); } catch (e) { board = board || { error: true }; }
+  boardBusy = false; boardAt = Date.now();
+  if (tab === "forest") render();
+}
+function plantTree(m = 25) {
+  S.trees = S.trees || []; S.trees.push({ t: Date.now(), m }); store.save(S);
+  const [, em, nm] = tier(m); toast("مبروك! اتزرعت " + nm + " " + em + " في غابتك");
+  loadBoard("plant", { minutes: m });
+}
+
+/* ---------- تنبيهات الموبايل (Web Push) ---------- */
+const NOTIFY_URL = AI_URL.replace("quick-service", "notify");
+let notif = null, notifAt = 0, notifBusy = false;
+async function notifCall(body) {
+  const r = await fetch(NOTIFY_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ pid: getPid(), tz: Intl.DateTimeFormat().resolvedOptions().timeZone, ...body }) });
+  const j = await r.json().catch(() => ({})); if (!r.ok) throw new Error(j.error || r.status); return j;
+}
+async function syncNotif() {
+  notifBusy = true;
+  try {
+    notif = await notifCall({ action: "sync", data: {
+      exams: S.exams.map(e => ({ id: e.id, subject: (subj(e.sid) || {}).name || "مادة", date: e.date, kind: e.kind || "" })),
+      classes: S.classes.map(c => ({ id: c.id, day: c.day, time: c.time, title: c.title })) } });
+  } catch (e) { notif = { error: e.message }; }
+  notifBusy = false; notifAt = Date.now(); if (tab === "account") render();
+}
+const keyBytes = k => Uint8Array.from(atob((k + "=".repeat((4 - k.length % 4) % 4)).replace(/-/g, "+").replace(/_/g, "/")), c => c.charCodeAt(0));
+const pushReady = () => /^https?:/.test(location.protocol) && window.isSecureContext && "serviceWorker" in navigator && "PushManager" in window && "Notification" in window;
+const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+async function enablePush() {
+  try {
+    const reg = await navigator.serviceWorker.ready;
+    if ((await Notification.requestPermission()) !== "granted") { toast("لازم تسمح بالإشعارات من المتصفح"); return; }
+    const { key } = await notifCall({ action: "vapid" });
+    const sub = (await reg.pushManager.getSubscription()) || await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: keyBytes(key) });
+    await notifCall({ action: "push_subscribe", sub: sub.toJSON() });
+    S.notifOn = true; store.save(S); await syncNotif(); toast("الإشعارات اتفعّلت ✅");
+  } catch (e) { toast("تعذر التفعيل: " + e.message); }
+}
+async function disablePush() {
+  try { const reg = await navigator.serviceWorker.ready, sub = await reg.pushManager.getSubscription();
+    if (sub) { await notifCall({ action: "push_unsubscribe", endpoint: sub.endpoint }); await sub.unsubscribe(); } } catch (e) {}
+  S.notifOn = false; store.save(S); render();
+}
+async function testPush() {
+  try { const r = await notifCall({ action: "test" }); toast(r.ok ? "اتبعت تنبيه تجريبي، هيوصلك خلال ثواني" : "الإرسال فشل (" + r.statuses.join(",") + ")"); }
+  catch (e) { toast(e.message === "not_subscribed" ? "فعّل الإشعارات الأول" : "تعذر الإرسال"); }
+}
+function notifCard() {
+  const on = S.notifOn && "Notification" in window && Notification.permission === "granted";
+  if (on && !notifBusy && Date.now() - notifAt > 20000) syncNotif();
+  return h("div", { class: "card" }, h("h3", {}, "تنبيهات الموبايل 📲"),
+    h("p", { class: "muted" }, "إشعارات من الموقع نفسه قبل المحاضرة بنص ساعة، وقبل الامتحان بـ3 أيام ويوم وفي يومه، وتذكير بالمذاكرة بالليل لو امتحانك قرب."),
+    !/^https?:/.test(location.protocol) ? h("p", { class: "muted" }, "⚠️ الإشعارات بتشتغل بس لما تفتح الموقع من رابط (زي Netlify) مش من ملف على الجهاز.")
+    : isIOS && !navigator.standalone ? h("p", { class: "muted" }, "على الآيفون: افتح الموقع في Safari، دوس زرار المشاركة ثم Add to Home Screen، وافتحه من الأيقونة وبعدها فعّل الإشعارات.")
+    : !pushReady() ? h("p", { class: "muted" }, "المتصفح ده مش بيدعم الإشعارات. جرّب Chrome على الأندرويد.")
+    : Notification.permission === "denied" ? h("p", { class: "muted" }, "الإشعارات متقفولة لهذا الموقع. افتح إعدادات الموقع في المتصفح واسمح بالإشعارات.")
+    : !on ? h("button", { onclick: enablePush }, "فعّل الإشعارات")
+    : h("div", {}, h("p", {}, "✅ الإشعارات شغّالة على الجهاز ده."),
+        h("div", { class: "inl" }, h("button", { class: "ghost sm", onclick: testPush }, "ابعت تنبيه تجريبي"), h("button", { class: "ghost sm", onclick: disablePush }, "إيقاف"))));
+}
+
+let sel = "global";
+const genCode = () => { const A = "ABCDEFGHJKMNPQRSTUVWXYZ23456789"; return Array.from({ length: 6 }, () => A[Math.floor(Math.random() * A.length)]).join(""); };
+async function joinRoom(code) {
+  code = String(code || "").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 12);
+  if (code.length < 4) { toast("الكود لازم يكون 4 حروف أو أرقام على الأقل"); return; }
+  try { board = await forestCall("join", { room: code }); sel = code; boardAt = Date.now(); toast("اتضمّيت للمجموعة " + code + " 👥"); render(); }
+  catch (e) { toast(e.message === "room_full" ? "المجموعة امتلأت (50 عضو)" : e.message === "too_many_rooms" ? "وصلت للحد الأقصى: 10 مجموعات" : "تعذر الانضمام، جرّب تاني"); }
+}
+async function leaveRoom(code) {
+  if (!(await sure("تطلع من المجموعة " + code + "؟"))) return;
+  try { board = await forestCall("leave", { room: code }); sel = "global"; boardAt = Date.now(); render(); } catch (e) { toast("تعذر الخروج"); }
+}
+async function invite(c) {
+  const link = /^https?:/.test(location.protocol) ? "\n" + location.href.split("#")[0] + "#join=" + c : "";
+  const text = "تعالى نذاكر مع بعض على UniMate 🌳 وننافس! انضم لمجموعتي بالكود: " + c + link;
+  try { if (navigator.share) await navigator.share({ text }); else { await navigator.clipboard.writeText(text); toast("اتنسخت الدعوة، ابعتها لصحابك"); } } catch (e) {}
+}
+function lbRows(list) {
+  const mx = Math.max(1, ...list.map(x => x.minutes)), medal = i => ["🥇", "🥈", "🥉"][i] || (i + 1);
+  return list.map((x, i) => h("div", { class: "lb" + (x.me ? " me" : "") }, h("span", { class: "r" }, medal(i)),
+    h("div", { class: "n" }, h("div", {}, x.name), h("div", { class: "bar" }, h("i", { style: "width:" + Math.round(x.minutes / mx * 100) + "%" }))),
+    h("span", {}, x.minutes + " د · " + x.trees + " 🌳")));
+}
+function challenge(list) {
+  const i = list.findIndex(x => x.me); if (i < 0 || list.length < 2) return "ادعي صحابك عشان تبدأوا المنافسة! 💪";
+  if (i === 0) return "👑 إنت في المركز الأول بفارق " + (list[0].minutes - list[1].minutes) + " دقيقة عن " + list[1].name + ". حافظ عليه!";
+  return "🔥 فاضل " + (list[i - 1].minutes - list[i].minutes + 1) + " دقيقة وتتخطى " + list[i - 1].name;
+}
+const views = {
+  home() {
+    const st = stats(), now = new Date(), key = iso(now), plan = planFor(now);
+    const total = plan.reduce((a, x) => a + x.min, 0), done = plan.filter(x => S.done[key + "|" + x.id]).length;
+    const upcoming = S.exams.filter(e => dnum(e.date) >= dnum(key)).sort((a, b) => a.date < b.date ? -1 : 1)[0];
+    return h("div", {},
+      h("div", { class: "card hero" }, h("h2", {}, "أهلاً يا " + S.profile.name),
+        h("p", {}, plan.length ? "النهاردة " + plan.length + " مهام، حوالي " + total + " دقيقة." : "ابدأ بإضافة موادك عشان نجهّز خطتك.")),
+      h("div", { class: "tiles" },
+        h("div", { class: "tile", style: "--a:var(--sun)" }, h("b", {}, st.streak), h("span", {}, "أيام متتالية")),
+        h("div", { class: "tile", style: "--a:var(--mint)" }, h("b", {}, st.lvl), h("span", {}, "المستوى")),
+        h("div", { class: "tile", style: "--a:var(--sky)" }, h("b", {}, st.mins), h("span", {}, "دقيقة مذاكرة"))),
+      upcoming && h("div", { class: "card" }, h("h3", {}, "أقرب امتحان"),
+        h("span", { class: "chip hot" }, (subj(upcoming.sid)?.name || "") + " — " + (dnum(upcoming.date) - dnum(key) || "النهاردة") + (dnum(upcoming.date) > dnum(key) ? " يوم" : ""))),
+      h("div", { class: "card" }, h("h3", {}, "مهام النهاردة"),
+        h("div", { class: "bar" }, h("i", { style: "width:" + (plan.length ? Math.round(done / plan.length * 100) : 0) + "%" })),
+        plan.length ? plan.map((x, i) => {
+          const k = key + "|" + x.id, hint = x.left !== null && x.left <= 3 ? "الامتحان قرّب، ركّز على المراجعة" : (i === 0 ? HINTS[S.profile.problem] : "");
+          return h("label", { class: "row" + (S.done[k] ? " done" : "") },
+            h("input", { type: "checkbox", checked: !!S.done[k], onchange: e => { e.target.checked ? S.done[k] = x.min : delete S.done[k]; commit(); } }),
+            h("span", { class: "dot", style: "background:" + PAL[x.c % 5] }),
+            h("span", { class: "t" }, h("span", { class: "n" }, x.name), hint && h("span", { class: "s" }, hint)),
+            h("span", { class: "muted" }, x.min + " دقيقة"));
+        }) : h("div", {}, h("p", { class: "muted" }, "مفيش مهام لسه."), h("button", { class: "sm", onclick: () => { tab = "subjects"; render(); } }, "أضف موادك"))),
+      h("div", { class: "card timer" }, h("h3", { id: "tMode" }, "جلسة تركيز"),
+        h("div", { class: "picks" }, DUR.map(([m, em]) => h("button", { class: "ghost sm" + ((S.tmin || 25) === m ? " on" : ""), onclick: () => {
+          if (tInt || tMode !== "work" || tLeft !== workSecs()) { toast("خلّص الجلسة الحالية أو دوس إعادة الأول"); return; }
+          S.tmin = m; store.save(S); tLeft = workSecs(); render(); } }, m + "د " + em))),
+        h("div", { class: "plant", id: "tPlant" }, "🌱"), h("div", { class: "time", id: "time" }, "25:00"),
+        h("div", { class: "inl" }, h("button", { id: "tGo", onclick: tToggle }, "ابدأ"), h("button", { class: "ghost", onclick: tReset }, "إعادة")), h("p", { class: "muted", id: "tCap" }, "")));
+  },
+
+  forest() {
+    const t = S.trees || [], today = t.filter(x => iso(new Date(tm(x).t)) === iso(new Date())).length, tot = t.reduce((a, x) => a + tm(x).m, 0);
+    if (!boardBusy && Date.now() - boardAt > 30000) loadBoard(sel === "global" ? "board" : "room", sel === "global" ? {} : { room: sel });
+    const nameI = h("input", { type: "text", maxlength: 20, placeholder: "اسمك في الترتيب", value: myName() });
+    nameI.onchange = () => { S.nick = nameI.value.trim().slice(0, 20); store.save(S); loadBoard("rename"); };
+    const codeI = h("input", { type: "text", maxlength: 12, placeholder: "كود المجموعة" });
+    const rooms = (board && board.rooms) || [];
+    const pick = (k, l) => h("button", { class: "ghost sm" + (sel === k ? " on" : ""), onclick: () => { sel = k; boardAt = 0; render(); } }, l);
+    let body;
+    if (!board) body = h("p", { class: "muted" }, "بحمّل الترتيب...");
+    else if (board.error) body = h("p", { class: "muted" }, "مش قادر أحمّل الترتيب دلوقتي، جرّب تاني بعد شوية.");
+    else if (sel === "global") body = [board.myRank ? h("p", { class: "muted" }, "ترتيبك: #" + board.myRank + " من " + board.players + " — دقايقك: " + board.myMinutes + " (" + board.myTrees + " 🌳)") : h("p", { class: "muted" }, "ازرع أول شجرة وادخل المنافسة!"), lbRows(board.top)];
+    else if (!board.roomData) body = h("p", { class: "muted" }, "بحمّل المجموعة...");
+    else body = [h("p", { class: "note" }, challenge(board.roomData.members)), lbRows(board.roomData.members),
+      h("div", { class: "inl" }, h("button", { onclick: () => invite(sel) }, "ادعي صحابك 📨"), h("button", { class: "ghost", onclick: () => leaveRoom(sel) }, "خروج من المجموعة"))];
+    return h("div", {}, head("الغابة 🌳", "اختار مدة المذاكرة وكل مدة بتطلّع شجرة مختلفة. وذاكروا مع بعض ونافسوا!"),
+      h("div", { class: "card" }, h("h3", {}, "غابتك: " + t.length + " شجرة (" + tot + " دقيقة) — النهارده " + today),
+        t.length ? h("div", { class: "forest" }, t.slice(-80).map(x => tier(tm(x).m)[1]))
+          : h("p", { class: "muted" }, "🌱 لسه مفيش أشجار. ابدأ جلسة تركيز من الرئيسية وكمّلها لحد الآخر."),
+        h("button", { class: "sm", onclick: () => { tab = "home"; render(); } }, "ابدأ جلسة تركيز")),
+      h("div", { class: "card" }, h("h3", {}, "المنافسة الأسبوعية 🏆"), h("p", { class: "muted" }, "الترتيب حسب دقايق التركيز في آخر 7 أيام"),
+        h("label", { class: "muted" }, "اسمك"), nameI,
+        h("div", { class: "picks" }, pick("global", "🌍 الكل"), rooms.map(r => pick(r.room, "👥 " + r.room + " (" + r.members + ")"))), body),
+      h("div", { class: "card" }, h("h3", {}, "مجموعات المذاكرة 👥"),
+        h("p", { class: "muted" }, "اعمل مجموعة وابعت الكود أو اللينك لصحابك، ويظهروا معاك من أي جهاز ويتنافسوا في ترتيب خاص بيكم."),
+        h("div", { class: "inl" }, h("button", { onclick: () => joinRoom(genCode()) }, "أنشئ مجموعة جديدة")),
+        h("div", { class: "inl", style: "margin-top:10px" }, codeI, h("button", { class: "ghost", onclick: () => joinRoom(codeI.value) }, "انضم بالكود"))));
+  },
+
+  ai() { return aiView(); },
+
+  subjects() {
+    const nameI = h("input", { type: "text", placeholder: "اسم المادة", required: true, "aria-label": "اسم المادة" });
+    const diff = h("select", { "aria-label": "الصعوبة" }, [["1", "سهلة"], ["2", "متوسطة"], ["3", "صعبة"]].map(([v, l]) => h("option", { value: v }, l)));
+    diff.value = "2";
+    return h("div", {}, head("موادي", "ضيف موادك ومحاضراتها وتابع اللي خلصته"),
+      h("form", { class: "card inl", onsubmit: e => { e.preventDefault(); S.subjects.push({ id: uid(), name: nameI.value.trim(), diff: +diff.value, c: S.subjects.length % 5, lectures: [] }); commit(); } },
+        nameI, diff, h("button", { type: "submit" }, "إضافة")),
+      !S.subjects.length && h("div", { class: "card empty" }, h("h3", {}, "لسه مفيش مواد"), h("p", { class: "muted" }, "أضف أول مادة من الخانة اللي فوق، وبعدها هنجهّز لك خطة يومية.")),
+      S.subjects.map(s => {
+        const dn = s.lectures.filter(l => l.done).length, li = h("input", { type: "text", placeholder: "اسم محاضرة جديدة", "aria-label": "محاضرة جديدة" });
+        return h("div", { class: "card", style: "border-inline-start:8px solid " + PAL[s.c % 5] },
+          h("div", { class: "inl" }, h("h3", { style: "flex:1;margin:0" }, s.name + " — " + ["", "سهلة", "متوسطة", "صعبة"][s.diff]),
+            h("button", { class: "ghost sm", onclick: async () => { if (await sure("حذف المادة وكل محاضراتها وامتحاناتها؟")) { S.subjects = S.subjects.filter(x => x.id !== s.id); S.exams = S.exams.filter(e => e.sid !== s.id); commit(); } } }, "حذف")),
+          h("p", { class: "muted" }, "خلّصت " + dn + " من " + s.lectures.length + " محاضرة"),
+          h("div", { class: "bar" }, h("i", { style: "width:" + (s.lectures.length ? Math.round(dn / s.lectures.length * 100) : 0) + "%" })),
+          s.lectures.map(l => h("label", { class: "row" + (l.done ? " done" : "") },
+            h("input", { type: "checkbox", checked: l.done, onchange: e => { l.done = e.target.checked; commit(); } }), h("span", { class: "t n" }, l.title))),
+          h("form", { class: "inl", onsubmit: e => { e.preventDefault(); if (li.value.trim()) { s.lectures.push({ id: uid(), title: li.value.trim(), done: false }); commit(); } } },
+            li, h("button", { class: "sm", type: "submit" }, "إضافة")));
+      }));
+  },
+
+  schedule() {
+    const day = h("select", { "aria-label": "اليوم" }, DAYS.map((d, i) => h("option", { value: i }, d)));
+    const time = h("input", { type: "time", value: "09:00", required: true, "aria-label": "الوقت" });
+    const title = h("input", { type: "text", placeholder: "محاضرة (مثال: فيزياء)", required: true, "aria-label": "اسم المحاضرة" });
+    const now = new Date();
+    return h("div", {}, head("الجدول", "محاضراتك الثابتة وخطة المذاكرة في مكان واحد"),
+      h("form", { class: "card inl", onsubmit: e => { e.preventDefault(); S.classes.push({ id: uid(), day: +day.value, time: time.value, title: title.value.trim() }); commit(); } },
+        day, time, title, h("button", { type: "submit" }, "إضافة محاضرة")),
+      h("div", { class: "card" }, [0, 1, 2, 3, 4, 5, 6].map(i => {
+        const d = new Date(now); d.setDate(d.getDate() + i);
+        return h("div", { class: "wd" + (i === 0 ? " today" : "") }, h("b", {}, (i === 0 ? "النهاردة — " : "") + DAYS[d.getDay()]), h("br"),
+          S.classes.filter(c => c.day === d.getDay()).sort((a, b) => a.time < b.time ? -1 : 1).map(c =>
+            h("span", { class: "chip cls" }, c.time + " " + c.title + " ", h("a", { href: "#", role: "button", "aria-label": "حذف", style: "color:inherit", onclick: e => { e.preventDefault(); S.classes = S.classes.filter(x => x.id !== c.id); commit(); } }, "✕"))),
+          planFor(d).map(x => h("span", { class: "chip", style: "background:" + PAL[x.c % 5] + ";color:#fff" }, x.name + " " + x.min + "د")));
+      })));
+  },
+
+  exams() {
+    const sel = h("select", { "aria-label": "المادة" }, S.subjects.map(s => h("option", { value: s.id }, s.name)));
+    const date = h("input", { type: "date", required: true, "aria-label": "تاريخ الامتحان" });
+    const kind = h("input", { type: "text", placeholder: "نوعه (ميد، فاينال...)", "aria-label": "نوع الامتحان" });
+    const key = iso(new Date());
+    return h("div", {}, head("الامتحانات", "سجّل مواعيدك والخطة هتتظبط على قرب كل امتحان"),
+      S.subjects.length ? h("form", { class: "card inl", onsubmit: e => { e.preventDefault(); S.exams.push({ id: uid(), sid: sel.value, date: date.value, kind: kind.value.trim() }); commit(); } },
+        sel, date, kind, h("button", { type: "submit" }, "إضافة")) : h("p", { class: "note" }, "ضيف موادك الأول من صفحة «موادي»."),
+      S.exams.slice().sort((a, b) => a.date < b.date ? -1 : 1).map(e => {
+        const d = dnum(e.date) - dnum(key);
+        return h("div", { class: "card inl" }, h("div", { style: "flex:1" }, h("h3", { style: "margin:0" }, (subj(e.sid)?.name || "") + (e.kind ? " — " + e.kind : "")), h("span", { class: "muted" }, e.date)),
+          h("span", { class: "chip" + (d >= 0 && d <= 3 ? " hot" : "") }, d < 0 ? "عدّى" : d === 0 ? "النهاردة" : "بعد " + d + " يوم"),
+          h("button", { class: "ghost sm", onclick: () => { S.exams = S.exams.filter(x => x.id !== e.id); commit(); } }, "حذف"));
+      }));
+  },
+
+  progress() {
+    const st = stats(), now = new Date();
+    const days = [6, 5, 4, 3, 2, 1, 0].map(i => { const d = new Date(now); d.setDate(d.getDate() - i); const k = iso(d); return { d, m: Object.entries(S.done).filter(([x]) => x.startsWith(k + "|")).reduce((a, [, v]) => a + v, 0) }; });
+    const max = Math.max(30, ...days.map(x => x.m));
+    return h("div", {}, head("تقدمي", "إنجازاتك ومستواك وأيام التزامك"),
+      h("div", { class: "card" }, h("h3", {}, "المستوى " + st.lvl + " — " + st.xp + " نقطة"),
+        h("div", { class: "bar" }, h("i", { style: "width:" + (st.xp % 100) + "%" })),
+        h("p", { class: "muted" }, "فاضل " + (100 - st.xp % 100) + " نقطة للمستوى الجاي. كل 3 دقايق مذاكرة = نقطة، وكل محاضرة = 15 نقطة.")),
+      h("div", { class: "tiles" },
+        h("div", { class: "tile", style: "--a:var(--sun)" }, h("b", {}, st.streak), h("span", {}, "أيام متتالية")),
+        h("div", { class: "tile", style: "--a:var(--pink)" }, h("b", {}, st.lec), h("span", {}, "محاضرة خلصت")),
+        h("div", { class: "tile", style: "--a:var(--mint)" }, h("b", {}, st.tasks), h("span", {}, "مهمة خلصت"))),
+      h("div", { class: "card" }, h("h3", {}, "مذاكرتك آخر 7 أيام (دقيقة)"),
+        h("div", { class: "bars" }, days.map(x => h("div", {}, x.m, h("em", { style: "height:" + Math.round(x.m / max * 80) + "px" }), DAYS[x.d.getDay()])))),
+      h("div", { class: "card" }, h("h3", {}, "إنجازاتك"),
+        h("div", { class: "badges" }, BADGES.map(([ic, t, f]) => h("div", { class: "badge" + (f(st) ? "" : " off") }, h("i", {}, ic), t)))));
+  },
+
+  account() {
+    return h("div", {}, head("حسابي", "بياناتك وتفضيلاتك"),
+      profileForm(p => { S.profile = p; commit(); toast("اتحفظت بياناتك"); }, "حفظ التعديلات"),
+      notifCard(),
+      h("div", { class: "card" }, h("h3", {}, "بياناتك"),
+        h("p", { class: "muted" }, "بياناتك محفوظة على جهازك دلوقتي. تسجيل الحساب والحفظ على السحابة هيجوا في الخطوة الجاية."),
+        h("div", { class: "inl" },
+          h("button", { class: "ghost", onclick: async () => { try { await navigator.clipboard.writeText(JSON.stringify(S)); toast("اتنسخت نسخة احتياطية من بياناتك"); } catch (e) { toast("تعذر النسخ"); } } }, "انسخ نسخة احتياطية"),
+          h("button", { class: "ghost", onclick: async () => { if (await sure("هتتمسح كل بياناتك. متأكد؟")) { store.clear(); S = { profile: null, subjects: [], exams: [], classes: [], done: {} }; tab = "home"; tReset(); render(); } } }, "ابدأ من جديد"))));
+  }
+};
+
+/* ---------- المساعد الذكي ---------- */
+let sample = null, hist = [], busy = false, live = null;
+(window.claude && claude.use ? claude.use("sample").catch(() => null) : Promise.resolve(null)).then(s => { sample = s; if (tab === "ai") render(); });
+const SYS = "أنت UniMate، مساعد دراسي ودود لطلاب الجامعة في مصر. اتكلم بالعامية المصرية البسيطة وخلّي إجاباتك عملية وقصيرة (أقل من 120 كلمة) من غير مقدمات. بيانات الطالب: ";
+function ctxData() {
+  const p = S.profile;
+  return { الاسم: p.name, الجامعة: p.uni, السنة: p.year, ساعات_يوميا: p.hours, اكبر_مشكلة: p.problem,
+    المواد: S.subjects.map(s => ({ الاسم: s.name, الصعوبة: s.diff, محاضرات_متبقية: s.lectures.filter(l => !l.done).length })),
+    الامتحانات: S.exams.map(e => ({ المادة: subj(e.sid)?.name, التاريخ: e.date })),
+    خطة_النهاردة: planFor(new Date()).map(x => ({ المادة: x.name, دقائق: x.min })) };
+}
+const context = () => SYS + JSON.stringify(ctxData());
+const chatMsgs = () => hist.slice(0, -1).filter(m => !m.err);
+async function callAI(msgs, onText) {
+  if (AI_URL) {
+    let r;
+    try {
+      r = await fetch(AI_URL, { method: "POST", headers: { "Content-Type": "application/json", apikey: AI_KEY, Authorization: "Bearer " + AI_KEY },
+        body: JSON.stringify({ messages: chatMsgs().map(({ role, content }) => ({ role, content })), context: ctxData() }) });
+    } catch (e) { throw { code: "failed", detail: "network: " + (e && e.message) }; }
+    if (r.status === 429) throw { code: "rate_limited" };
+    if (!r.ok) { let d = ""; try { const j = await r.json(); d = j.error || j.message || JSON.stringify(j); } catch (e) {} throw { code: "failed", detail: r.status + " - " + d }; }
+    const j = await r.json(); onText({ text: j.text }); return { text: j.text };
+  }
+  return sample(msgs, { cache: false, onText });
+}
+async function ask(text) {
+  if (!(AI_URL || sample) || busy || !text.trim()) return;
+  busy = true; hist.push({ role: "user", content: text }, { role: "assistant", content: "بفكر..." }); render();
+  const msgs = chatMsgs().map((m, i) => i === 0 ? { role: "user", content: context() + "\n\nسؤال الطالب: " + m.content } : m);
+  try {
+    const r = await callAI(msgs, ({ text }) => { hist[hist.length - 1].content = text; if (live) { live.textContent = text; live.parentNode.scrollTop = 1e6; } });
+    hist[hist.length - 1].content = r.text;
+    if (hist.length > 12) hist.splice(0, 2);
+  } catch (e) {
+    hist.splice(-2); hist.push({ role: "assistant", content: e && e.code === "rate_limited" ? "الطلبات كتير دلوقتي، جرّب بعد شوية." : "المساعد مش متاح حاليًا. جرّب تاني بعد شوية." + (e && e.detail ? " [" + e.detail + "]" : ""), err: true });
+  }
+  busy = false; render();
+}
+function aiView() {
+  if (!(AI_URL || sample)) return h("div", {}, head("المساعد الذكي", "اسأل عن خطتك أو أي حاجة في مذاكرتك"), h("p", { class: "note" }, "المساعد مش متاح في الجلسة دي. هيشتغل لما تفتح الصفحة المنشورة على Claude."));
+  const q = h("input", { type: "text", placeholder: "اسأل عن أي حاجة في مذاكرتك", "aria-label": "سؤالك" });
+  const go = () => { const v = q.value; q.value = ""; ask(v); };
+  q.addEventListener("keydown", e => { if (e.key === "Enter") go(); });
+  const chat = h("div", { class: "chat", "aria-live": "polite" }, hist.map(m => h("div", { class: "msg " + (m.role === "user" ? "u" : "a") }, m.content)));
+  live = hist.length && hist[hist.length - 1].role === "assistant" ? chat.lastChild : null;
+  setTimeout(() => chat.scrollTop = 1e6);
+  return h("div", {}, head("المساعد الذكي", "اسأل عن خطتك أو أي حاجة في مذاكرتك"),
+    h("div", { class: "inl", style: "margin-bottom:10px" }, ["حلّل خطتي وادّيني نصيحة", "ازاي أبطّل تأجيل؟", "اعملّي خطة مراجعة لأقرب امتحان"].map(t => h("button", { class: "ghost sm", disabled: busy, onclick: () => ask(t) }, t))),
+    h("div", { class: "card" }, chat, h("div", { class: "inl" }, q, h("button", { disabled: busy, onclick: go }, "اسأل"))));
+}
+
+/* ---------- التشغيل ---------- */
+(() => { const m = location.hash.match(/^#join=([A-Za-z0-9]{4,12})$/); if (m) { S.pendingJoin = m[1].toUpperCase(); store.save(S); history.replaceState(null, "", location.pathname + location.search); } })();
+function render() {
+  const nav = $("nav"), v = $("view");
+  if (!S.profile) {
+    nav.hidden = true;
+    v.replaceChildren(h("div", {}, h("h2", {}, "أهلاً بيك في UniMate AI"),
+      h("ul", { class: "feat" }, h("li", {}, "خطة يومية بتتغير مع قرب امتحاناتك"), h("li", {}, "متابعة محاضراتك وإنجازاتك"), h("li", {}, "مساعد ذكي يجاوب أسئلتك")),
+      profileForm(p => { S.profile = p; tab = "subjects"; commit(); }, "يلا نبدأ")));
+    return;
+  }
+  nav.hidden = false;
+  if (S.pendingJoin) { const c = S.pendingJoin; S.pendingJoin = null; store.save(S); tab = "forest"; sel = "global"; sure("تنضم لمجموعة المذاكرة " + c + " 👥؟").then(ok => { if (ok) joinRoom(c); }); }
+  nav.replaceChildren(h("div", { class: "bside" }, h("span", { class: "logo" }, "U"), "UniMate AI"), ...TABS.map(([k, l]) => h("button", { "aria-current": k === tab ? "page" : null, onclick: () => { tab = k; render(); window.scrollTo(0, 0); } }, ico(k), l)));
+  v.replaceChildren(views[tab]());
+  tPaint();
+}
+render();
+</script>
+<script>if("serviceWorker"in navigator&&location.protocol.startsWith("http"))addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));</script>
+</body>
+</html>
