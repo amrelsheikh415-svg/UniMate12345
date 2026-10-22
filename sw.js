@@ -21,7 +21,9 @@ self.addEventListener("push", event => {
     body,
     data: { url: payload.url || self.registration.scope },
     tag: payload.tag || "unimate-reminder",
-    renotify: false
+    renotify: false,
+    requireInteraction: true,
+    vibrate: [500, 250, 500, 250, 1000]
   };
 
   event.waitUntil(self.registration.showNotification(title, options));
